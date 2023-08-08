@@ -6,7 +6,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 2.0"
+      version = "~> 3.0"
     }
   }
 }
@@ -17,11 +17,12 @@ terraform {
 
 variable "resource_group_name" {
   type = string
+  default = "RG_TFLearning"
 }
 
 variable "location" {
   type    = string
-  default = "eastus"
+  default = "germanywestcentral"
 }
 
 
@@ -59,9 +60,11 @@ resource "azurerm_resource_group" "vnet_main" {
 
 module "vnet-main" {
   source              = "Azure/vnet/azurerm"
-  version             = "~> 2.0"
+  version             = "~> 4.1"
   resource_group_name = azurerm_resource_group.vnet_main.name
   vnet_name           = var.resource_group_name
+  vnet_location = azurerm_resource_group.vnet_main.location
+  use_for_each = true
   address_space       = [var.vnet_cidr_range]
   subnet_prefixes     = var.subnet_prefixes
   subnet_names        = var.subnet_names

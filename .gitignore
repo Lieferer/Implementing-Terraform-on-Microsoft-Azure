@@ -12,3 +12,6 @@
 *.tfplan
 
 *next-step.txt
+
+import
+aztfexport.exe
