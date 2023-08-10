@@ -6,7 +6,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 2.0"
+      version = "~> 3.6"
     }
   }
 }
@@ -21,7 +21,7 @@ variable "resource_group_name" {
 
 variable "location" {
   type    = string
-  default = "eastus"
+  default = "germanywestcentral"
 }
 
 variable "naming_prefix" {
@@ -95,6 +95,8 @@ data "azurerm_storage_account_sas" "state" {
     create  = true
     update  = false
     process = false
+    tag     = false
+    filter  = false
   }
 }
 

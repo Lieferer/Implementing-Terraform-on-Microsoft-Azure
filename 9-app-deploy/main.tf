@@ -6,7 +6,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 2.0"
+      version = "~> 3.0"
     }
   }
 
@@ -29,7 +29,7 @@ variable "naming_prefix" {
 
 variable "location" {
   type    = string
-  default = "eastus"
+  default = "germanywestcentral"
 }
 
 variable "network_state" {
@@ -73,8 +73,8 @@ data "terraform_remote_state" "networking" {
 
 data "azurerm_subnet" "app" {
   name                 = "app"
-  virtual_network_name = data.terraform_remote_state.networking.outputs.vnet_name
-  resource_group_name  = data.terraform_remote_state.networking.outputs.resource_group_name
+  virtual_network_name = data.terraform_remote_state.networking.outputs
+  resource_group_name  = data.terraform_remote_state.networking.outputs
 }
 
 #############################################################################
@@ -154,7 +154,7 @@ resource "azurerm_virtual_machine" "main" {
   storage_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
+    sku       = "22.04-LTS"
     version   = "latest"
   }
   storage_os_disk {

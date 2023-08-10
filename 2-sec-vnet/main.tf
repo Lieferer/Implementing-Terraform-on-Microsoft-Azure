@@ -32,7 +32,7 @@ variable "sec_resource_group_name" {
 
 variable "location" {
   type    = string
-  default = "eastus"
+  default = "germanywestcentral"
 }
 
 variable "vnet_cidr_range" {
@@ -77,7 +77,7 @@ resource "azurerm_resource_group" "vnet_sec" {
 
 module "vnet-sec" {
   source              = "Azure/vnet/azurerm"
-  version             = "~> 2.0"
+  version             = "~> 4.1"
   resource_group_name = azurerm_resource_group.vnet_sec.name
   vnet_name           = var.sec_resource_group_name
   address_space       = [var.vnet_cidr_range]
